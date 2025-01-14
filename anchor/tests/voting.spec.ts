@@ -86,5 +86,19 @@ describe("voting", () => {
     expect(smoothCandidate.candidateVotes.toNumber()).toEqual(0);
   });
 
-  it("vote", async () => {});
+  it("vote", async () => {
+    await votingProgram.methods.vote(
+      "Smooth",
+      new BN(1)
+    ).rpc()
+
+    const [smoothCandidateAddress] = PublicKey.findProgramAddressSync(
+      [new BN(1).toArrayLike(Buffer, "le", 8),Buffer.from("Smooth")],
+      votingAddress
+    );
+
+    const smoothCandidate = await votingProgram.account.candidate.fetch(smoothCandidateAddress);
+    console.log(smoothCandidate);
+    expect(smoothCandidate.candidateVotes.toNumber()).toEqual(1);
+  });
 });
