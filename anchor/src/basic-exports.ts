@@ -5,7 +5,7 @@ import VotingIDL from '../target/idl/voting.json'
 import type { Voting } from '../target/types/voting'
 
 // Re-export the generated IDL and type
-export { Voting, VotingIDL as BasicIDL }
+export { Voting, VotingIDL}
 
 // The programId is imported from the program IDL.
 export const BASIC_PROGRAM_ID = new PublicKey(VotingIDL.address)
