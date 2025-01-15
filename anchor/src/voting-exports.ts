@@ -4,6 +4,7 @@ import { PublicKey } from '@solana/web3.js'
 import VotingIDL from '../target/idl/voting.json'
 import type { Voting } from '../target/types/voting'
 
+
 // Re-export the generated IDL and type
 export { Voting, VotingIDL}
 
@@ -12,5 +13,5 @@ export const BASIC_PROGRAM_ID = new PublicKey(VotingIDL.address)
 
 // This is a helper function to get the Basic Anchor program.
 export function getBasicProgram(provider: AnchorProvider) {
-  return new Program(VotingIDL, provider)
+  return new Program(VotingIDL as Voting, provider)
 }
