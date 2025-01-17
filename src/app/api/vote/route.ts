@@ -21,12 +21,12 @@ export async function GET(request: Request) {
       actions: [
         {
           href: "/api/vote?candidate=Crunchy",
-          label: "Vote for Smooth",
+          label: "Vote for Crunchy",
           type: "post",
         },
         {
           href: "/api/vote?candidate=Smooth",
-          label: "Vote for Crunchy",
+          label: "Vote for Smooth",
           type: "post",
         },
       ],
