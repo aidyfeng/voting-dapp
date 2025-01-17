@@ -4,6 +4,7 @@ import {
   ActionGetResponse,
   ActionPostRequest,
   ACTIONS_CORS_HEADERS,
+  createPostResponse,
 } from "@solana/actions";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import { BN } from "bn.js";
@@ -71,5 +72,17 @@ export async function POST(request: Request) {
 
     const blockhash = await connection.getLatestBlockhash();
 
-    const transaction = new Transaction().add(instruction);
+    const tx = new Transaction({
+      feePayer: voter,
+      blockhash: blockhash.blockhash,
+      lastValidBlockHeight: blockhash.lastValidBlockHeight
+    }).add(instruction);
+    
+    const response = await createPostResponse({
+      fields:{
+        transaction:tx
+      }
+    });
+
+    return Response.json(response, { headers: ACTIONS_CORS_HEADERS });
 }

@@ -1,4 +1,4 @@
-import { BN, Program } from "@coral-xyz/anchor";
+import { AnchorProvider, BN, getProvider, Program, setProvider, workspace } from "@coral-xyz/anchor";
 import { PublicKey } from "@solana/web3.js";
 import { BankrunProvider, startAnchor } from "anchor-bankrun";
 import { Voting } from "anchor/target/types/voting";
@@ -6,16 +6,17 @@ import { Voting } from "anchor/target/types/voting";
 const IDL = require("../target/idl/voting.json");
 
 const votingAddress = new PublicKey(
-  "6z68wfurCMYkZG51s1Et9BJEd9nJGUusjHXNt4dGbNNF"
+  "9WkcDBzyxEMGrPVZNksk8qSgGqEA96DcQkxzV1nUNCvv"
 );
 
 describe("voting", () => {
   let context;
   let provider;
-  let votingProgram: Program<Voting>;
+  setProvider(AnchorProvider.env());
+  let votingProgram = workspace.Voting as Program<Voting>;
 
   beforeAll(async () => {
-    context = await startAnchor(
+    /* context = await startAnchor(
       "",
       [{ name: "voting", programId: votingAddress }],
       []
@@ -23,7 +24,7 @@ describe("voting", () => {
 
     provider = new BankrunProvider(context);
 
-    votingProgram = new Program<Voting>(IDL, provider);
+    votingProgram = new Program<Voting>(IDL, provider); */
   });
 
   it("Initialize Poll", async () => {
